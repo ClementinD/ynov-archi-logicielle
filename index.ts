@@ -1,20 +1,30 @@
-import { MarsRover } from "./MarsRover";
+import { Rover } from "./classes/Rover";
+import { Orientation } from "./enums/Orientation";
+import { Map } from "./classes/Map";
 
-const rover = new MarsRover(0, 0, 'N');
-console.log(rover.getState()); // Output: "(0, 0), Orientation: N"
-rover.turnLeft();
-console.log(rover.getState());
+const map: Map = {
+	x: 4,
+	y: 4,
+	getSize: function (): { x: number; y: number } | null {
+		throw new Error("Function not implemented.");
+	},
+};
 
-rover.moveBackward();
-console.log(rover.getState());
+const rover = new Rover(Orientation.South, { x: 0, y: 0 }, map);
 
-rover.turnLeft();
-console.log(rover.getState());
-
-function sayHello(): void {
-  console.log("Hello, World!");
-}
-
-
-
-sayHello();
+rover.Avancer();
+rover.TournerADroite();
+console.log(rover.getPosition());
+console.log(rover.getOrientation());
+rover.Reculer();
+console.log(rover.getPosition());
+console.log(rover.getOrientation());
+rover.TournerADroite();
+console.log(rover.getPosition());
+console.log(rover.getOrientation());
+rover.Avancer();
+console.log(rover.getPosition());
+console.log(rover.getOrientation());
+rover.TournerADroite();
+rover.Avancer();
+console.log(rover.getPosition());
