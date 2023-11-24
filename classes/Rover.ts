@@ -18,52 +18,51 @@ export class Rover implements IRover {
     this.orientation = Orientation.West;
   }
 
-  Avancer(): IRover {
-    const newPosition = { ...this.position };
-
+  Avancer(): void {
     switch (this.orientation) {
+      //haut
       case Orientation.North:
-        newPosition.y = (newPosition.y + 1) % this.map.y;
+        this.position.y =
+          this.position.y == this.map.y ? this.map.y - 1 : this.position.y + 1;
         break;
+      //bas
       case Orientation.South:
-        newPosition.y = (newPosition.y - 1 + this.map.y) % this.map.y;
+        this.position.y = this.position.y == this.map.y ? 0 : this.map.y + 1;
         break;
+      //droite
       case Orientation.East:
-        newPosition.x = (newPosition.x + 1) % this.map.x;
+        this.position.x = this.position.x == this.map.x ? 0 : this.map.x + 1;
         break;
+      //gauche
       case Orientation.West:
-        newPosition.x = (newPosition.x - 1 + this.map.x) % this.map.x;
-        break;
-      default:
+        this.position.x =
+          this.position.x == 0 ? this.position.x - 1 : this.map.x - 1;
         break;
     }
-
-    return new Rover(this.orientation, newPosition, this.map);
   }
 
-  Reculer(): IRover {
-    const newPosition = { ...this.position };
-
+  Reculer(): void {
     switch (this.orientation) {
+      //haut
       case Orientation.North:
-        newPosition.y = (newPosition.y - 1 + this.map.y) % this.map.y;
+        this.position.y = this.position.y == this.map.y ? 0 : this.map.y - 1;
         break;
+      //bas
       case Orientation.South:
         this.position.y =
-          this.position.y == 0 ? this.map.y : this.position.y - 1;
+          this.position.y == 0 ? this.map.y - 1 : this.position.y - 1;
         break;
+      //droite
       case Orientation.East:
         this.position.x =
           this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
         break;
+      //gauche
       case Orientation.West:
-        newPosition.x = (newPosition.x + 1) % this.map.x;
-        break;
-      default:
+        this.position.x =
+          this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
         break;
     }
-
-    return new Rover(this.orientation, newPosition, this.map);
   }
 
   getPosition(): Position {

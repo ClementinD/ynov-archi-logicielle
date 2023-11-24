@@ -1,5 +1,4 @@
 import { Position } from "../classes/Position";
-import { Map } from "./IMaps";
 
 export interface IRover {
   orientation: string;
@@ -7,7 +6,7 @@ export interface IRover {
 
   TournerADroite(): void;
   TournerAGauche(): void;
-  Avancer(map: Map): IRover;
-  Reculer(map: Map): IRover;
+  Avancer(): void;
+  Reculer(): void;
   getPosition(): Position;
 }

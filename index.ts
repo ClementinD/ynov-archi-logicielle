@@ -19,9 +19,12 @@ console.log(rover.getPosition());
 rover.Reculer();
 console.log(rover.getPosition());
 console.log(rover.getOrientation());
-
-// rover.TournerADroite();
-// rover.Avancer();
+rover.TournerADroite();
+console.log(rover.getPosition());
+console.log(rover.getOrientation());
+rover.Avancer();
+console.log(rover.getPosition());
+console.log(rover.getOrientation());
 // rover.TournerADroite();
 // rover.Avancer();
 // console.log(rover.getPosition());
