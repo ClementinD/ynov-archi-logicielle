@@ -49,10 +49,12 @@ export class Rover implements IRover {
         newPosition.y = (newPosition.y - 1 + this.map.y) % this.map.y;
         break;
       case Orientation.South:
-        newPosition.y = (newPosition.y + 1) % this.map.y;
+        this.position.y =
+          this.position.y == 0 ? this.map.y : this.position.y - 1;
         break;
       case Orientation.East:
-        newPosition.x = (newPosition.x - 1 + this.map.x) % this.map.x;
+        this.position.x =
+          this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
         break;
       case Orientation.West:
         newPosition.x = (newPosition.x + 1) % this.map.x;
