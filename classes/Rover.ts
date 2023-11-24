@@ -11,56 +11,73 @@ export class Rover implements IRover {
   ) {}
 
   TournerADroite(): void {
-    this.orientation = Orientation.East;
+    switch (this.orientation) {
+      case Orientation.North:
+        this.orientation = Orientation.East;
+        break;
+      case Orientation.South:
+        this.orientation = Orientation.West;
+        break;
+      case Orientation.East:
+        this.orientation = Orientation.South;
+        break;
+      case Orientation.West:
+        this.orientation = Orientation.North;
+        break;
+    }
   }
 
   TournerAGauche(): void {
-    this.orientation = Orientation.West;
+    switch (this.orientation) {
+      case Orientation.North:
+        this.orientation = Orientation.West;
+        break;
+      case Orientation.South:
+        this.orientation = Orientation.East;
+        break;
+      case Orientation.East:
+        this.orientation = Orientation.North;
+        break;
+      case Orientation.West:
+        this.orientation = Orientation.South;
+        break;
+    }
   }
 
   Avancer(): void {
     switch (this.orientation) {
-      //haut
       case Orientation.North:
         this.position.y =
-          this.position.y == this.map.y ? this.map.y - 1 : this.position.y + 1;
+          this.position.y - 1 < 0 ? this.map.y - 1 : this.position.y - 1;
         break;
-      //bas
       case Orientation.South:
-        this.position.y = this.position.y == this.map.y ? 0 : this.map.y + 1;
+        this.position.y = (this.position.y + 1) % this.map.y;
         break;
-      //droite
       case Orientation.East:
-        this.position.x = this.position.x == this.map.x ? 0 : this.map.x + 1;
+        this.position.x = (this.position.x + 1) % this.map.x;
         break;
-      //gauche
       case Orientation.West:
         this.position.x =
-          this.position.x == 0 ? this.position.x - 1 : this.map.x - 1;
+          this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
         break;
     }
   }
 
   Reculer(): void {
     switch (this.orientation) {
-      //haut
       case Orientation.North:
-        this.position.y = this.position.y == this.map.y ? 0 : this.map.y - 1;
+        this.position.y = (this.position.y + 1) % this.map.y;
         break;
-      //bas
       case Orientation.South:
         this.position.y =
-          this.position.y == 0 ? this.map.y - 1 : this.position.y - 1;
+          this.position.y - 1 < 0 ? this.map.y - 1 : this.position.y - 1;
         break;
-      //droite
       case Orientation.East:
         this.position.x =
           this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
         break;
-      //gauche
       case Orientation.West:
-        this.position.x =
-          this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
+        this.position.x = (this.position.x + 1) % this.map.x;
         break;
     }
   }
