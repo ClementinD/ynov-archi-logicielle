@@ -12,12 +12,10 @@ describe("Rover", () => {
 	});	
 
 	test("should move front", () => {
-		console.log(rover.getPosition());
 		rover.Avancer();
 		expect(rover.getPosition()).toEqual({ x: 0, y: 1 });
 	});
 	test("should move forward", () => {
-		console.log(rover.getPosition());
 		rover.Reculer();
 		expect(rover.getPosition()).toEqual({ x: 0, y: map.y - 1 });
 	});
