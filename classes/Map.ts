@@ -1,4 +1,4 @@
-import { IMap } from "../interfaces/IMaps";
+import { IMap } from "../interfaces/IMap";
 
 export class Map implements IMap {
   constructor(public x: number, public y: number) {}
