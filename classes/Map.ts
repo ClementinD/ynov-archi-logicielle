@@ -1,4 +1,5 @@
 import { IMap } from "../interfaces/IMaps";
+import { Position } from "../classes/Position";
 
 export class Map implements IMap {
   constructor(public x: number, public y: number) {}
@@ -8,10 +9,10 @@ export class Map implements IMap {
   }
 
   // Ajoutez une méthode pour obtenir les coordonnées toroïdales
-  getToroidalCoordinates(x: number, y: number): { x: number; y: number } {
+  getToroidalCoordinates(position: Position): Position {
     return {
-      x: (x + this.x) % this.x,
-      y: (y + this.y) % this.y,
+      x: (position.x + this.x) % this.x,
+      y: (position.y + this.y) % this.y,
     };
   }
 }

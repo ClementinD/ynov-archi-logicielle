@@ -1,5 +1,5 @@
 import { Rover } from "../classes/Rover";
-import { Orientation } from "../enums/Orientation";
+import { Orientation } from "../classes/Orientation";
 import { Map } from "../classes/Map";
 
 describe("Rover", () => {
@@ -34,7 +34,7 @@ describe("Rover", () => {
     // Action : Appel de la méthode TournerADroite du rover
     rover.TournerADroite();
     // Vérification : L'orientation du rover devrait être à l'ouest (WEST)
-    expect(rover.getOrientation()).toEqual("WEST");
+		expect(rover.getOrientation().toString()).toEqual("EAST");
   });
 
   // Test pour vérifier la rotation vers la gauche (TournerAGauche)
@@ -42,6 +42,6 @@ describe("Rover", () => {
     // Action : Appel de la méthode TournerAGauche du rover
     rover.TournerAGauche();
     // Vérification : L'orientation du rover devrait être à l'est (EAST)
-    expect(rover.getOrientation()).toEqual("EAST");
+		expect(rover.getOrientation().toString()).toEqual("NORTH");
   });
 });
