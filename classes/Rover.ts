@@ -4,102 +4,89 @@ import { IRover } from "../interfaces/IRover";
 import { Map } from "../classes/Map";
 
 export class Rover implements IRover {
+  // Constructeur de la classe Rover
   constructor(
     public orientation: Orientation,
     public position: Position,
     public map: Map
   ) {}
 
+  // Objets de mapping pour les déplacements, les changements d'orientation à droite et à gauche
+  private deplacements = {
+    [Orientation.North]: { x: 0, y: -1 },
+    [Orientation.South]: { x: 0, y: 1 },
+    [Orientation.East]: { x: 1, y: 0 },
+    [Orientation.West]: { x: -1, y: 0 },
+  };
+
+  private changementsOrientationDroite = {
+    [Orientation.North]: Orientation.East,
+    [Orientation.South]: Orientation.West,
+    [Orientation.East]: Orientation.South,
+    [Orientation.West]: Orientation.North,
+  };
+
+  private changementsOrientationGauche = {
+    [Orientation.North]: Orientation.West,
+    [Orientation.South]: Orientation.East,
+    [Orientation.East]: Orientation.North,
+    [Orientation.West]: Orientation.South,
+  };
+
+  // Fonction privée pour déplacer le rover selon les distances spécifiées
+  private deplacer(distanceX: number, distanceY: number): void {
+    // Calcul des nouvelles coordonnées en prenant en compte la toroïdalité
+    const newPosition = {
+      x: (this.position.x + distanceX + this.map.x) % this.map.x,
+      y: (this.position.y + distanceY + this.map.y) % this.map.y,
+    };
+    this.position = newPosition;
+  }
+
+  // Fonction privée pour ajuster les coordonnées selon la toroïdalité de la carte
+  private toroidalCoordinates(): void {
+    const toroidalCoords = this.map.getToroidalCoordinates(
+      this.position.x,
+      this.position.y
+    );
+    this.position.x = toroidalCoords.x;
+    this.position.y = toroidalCoords.y;
+  }
+
+  // Méthode pour tourner le rover à droite
   TournerADroite(): void {
-    switch (this.orientation) {
-      case Orientation.North:
-        this.orientation = Orientation.East;
-        break;
-      case Orientation.South:
-        this.orientation = Orientation.West;
-        break;
-      case Orientation.East:
-        this.orientation = Orientation.South;
-        break;
-      case Orientation.West:
-        this.orientation = Orientation.North;
-        break;
-    }
+    this.orientation = this.changementsOrientationDroite[this.orientation];
   }
 
+  // Méthode pour tourner le rover à gauche
   TournerAGauche(): void {
-    switch (this.orientation) {
-      case Orientation.North:
-        this.orientation = Orientation.West;
-        break;
-      case Orientation.South:
-        this.orientation = Orientation.East;
-        break;
-      case Orientation.East:
-        this.orientation = Orientation.North;
-        break;
-      case Orientation.West:
-        this.orientation = Orientation.South;
-        break;
-    }
+    this.orientation = this.changementsOrientationGauche[this.orientation];
   }
 
+  // Méthode pour avancer le rover
   Avancer(): void {
-    switch (this.orientation) {
-      case Orientation.North:
-        this.position.y =
-          this.position.y - 1 < 0 ? this.map.y - 1 : this.position.y - 1;
-        break;
-      case Orientation.South:
-        this.position.y = (this.position.y + 1) % this.map.y;
-        break;
-      case Orientation.East:
-        this.position.x = (this.position.x + 1) % this.map.x;
-        break;
-      case Orientation.West:
-        this.position.x =
-          this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
-        break;
-    }
-    // Utilisez les coordonnées toroïdales après le déplacement
-    const toroidalCoords = this.map.getToroidalCoordinates(
-      this.position.x,
-      this.position.y
-    );
-    this.position.x = toroidalCoords.x;
-    this.position.y = toroidalCoords.y;
+    // Obtention du déplacement correspondant à l'orientation actuelle
+    const deplacement = this.deplacements[this.orientation];
+    // Application du déplacement et ajustement des coordonnées selon la toroïdalité
+    this.deplacer(deplacement.x, deplacement.y);
+    this.toroidalCoordinates();
   }
 
+  // Méthode pour reculer le rover
   Reculer(): void {
-    switch (this.orientation) {
-      case Orientation.North:
-        this.position.y = (this.position.y + 1) % this.map.y;
-        break;
-      case Orientation.South:
-        this.position.y =
-          this.position.y - 1 < 0 ? this.map.y - 1 : this.position.y - 1;
-        break;
-      case Orientation.East:
-        this.position.x =
-          this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
-        break;
-      case Orientation.West:
-        this.position.x = (this.position.x + 1) % this.map.x;
-        break;
-    }
-    // Utilisez les coordonnées toroïdales après le déplacement
-    const toroidalCoords = this.map.getToroidalCoordinates(
-      this.position.x,
-      this.position.y
-    );
-    this.position.x = toroidalCoords.x;
-    this.position.y = toroidalCoords.y;
+    // Obtention du déplacement correspondant à l'orientation actuelle
+    const deplacement = this.deplacements[this.orientation];
+    // Application du déplacement inverse et ajustement des coordonnées selon la toroïdalité
+    this.deplacer(-deplacement.x, -deplacement.y);
+    this.toroidalCoordinates();
   }
 
+  // Méthode pour obtenir les coordonnées actuelles du rover
   getPosition(): Position {
     return this.position;
   }
 
+  // Méthode pour obtenir l'orientation actuelle du rover
   getOrientation(): Orientation {
     return this.orientation;
   }
