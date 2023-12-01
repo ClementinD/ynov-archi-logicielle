@@ -10,9 +10,9 @@ export class Map implements IMap {
 
   // Ajoutez une méthode pour obtenir les coordonnées toroïdales
   getToroidalCoordinates(position: Position): Position {
-    return {
-      x: (position.x + this.x) % this.x,
-      y: (position.y + this.y) % this.y,
-    };
+    return new Position(
+      (position.x + this.x) % this.x,
+      (position.y + this.y) % this.y
+    );
   }
 }

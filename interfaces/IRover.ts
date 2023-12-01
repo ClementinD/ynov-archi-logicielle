@@ -9,5 +9,4 @@ export interface IRover {
   TournerAGauche(): void;
   Avancer(): void;
   Reculer(): void;
-  getPosition(): Position;
 }

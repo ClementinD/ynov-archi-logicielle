@@ -32,4 +32,9 @@ export class Orientation {
       Orientation.orientations.length;
     return Orientation.orientations[previousIndex];
   }
+
+  // Méthode pour obtenir l'orientation actuelle du rover
+  getOrientation(): string {
+    return this.toString();
+  }
 }
