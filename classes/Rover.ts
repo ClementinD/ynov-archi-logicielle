@@ -61,6 +61,13 @@ export class Rover implements IRover {
           this.position.x - 1 < 0 ? this.map.x - 1 : this.position.x - 1;
         break;
     }
+    // Utilisez les coordonnées toroïdales après le déplacement
+    const toroidalCoords = this.map.getToroidalCoordinates(
+      this.position.x,
+      this.position.y
+    );
+    this.position.x = toroidalCoords.x;
+    this.position.y = toroidalCoords.y;
   }
 
   Reculer(): void {
@@ -80,6 +87,13 @@ export class Rover implements IRover {
         this.position.x = (this.position.x + 1) % this.map.x;
         break;
     }
+    // Utilisez les coordonnées toroïdales après le déplacement
+    const toroidalCoords = this.map.getToroidalCoordinates(
+      this.position.x,
+      this.position.y
+    );
+    this.position.x = toroidalCoords.x;
+    this.position.y = toroidalCoords.y;
   }
 
   getPosition(): Position {

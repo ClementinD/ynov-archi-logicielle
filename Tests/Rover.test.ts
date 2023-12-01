@@ -7,9 +7,9 @@ describe("Rover", () => {
 	let rover: Rover;
 
 	beforeEach(() => {
-		map = { x: 4, y: 4, getSize: () => ({ x: 4, y: 4 }) };
+		map = new Map(4, 4);
 		rover = new Rover(Orientation.South, { x: 0, y: 0 }, map);
-	});
+	});	
 
 	test("should move front", () => {
 		console.log(rover.getPosition());
