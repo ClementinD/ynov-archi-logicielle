@@ -5,10 +5,15 @@ export class Position implements IPosition {
   constructor(public x: number, public y: number) {}
 
   static deplacer(position: Position, distanceX: number, distanceY: number, mapX: number, mapY: number): Position {
+    // Fonction pour gérer correctement le modulo avec des nombres négatifs
+    function mod(n: number, m: number): number {
+      return ((n % m) + m) % m;
+    }
+
     // Calcul des nouvelles coordonnées en prenant en compte la toroïdalité
     const newPosition = {
-      x: (position.x + distanceX + mapX) % mapX,
-      y: (position.y + distanceY + mapY) % mapY,
+      x: mod(position.x + distanceX, mapX),
+      y: mod(position.y + distanceY, mapY),
     };
     return new Position(newPosition.x, newPosition.y);
   }
