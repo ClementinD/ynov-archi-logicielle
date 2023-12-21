@@ -21,7 +21,13 @@ export class Rover implements IRover {
 
   // Fonction privée pour déplacer le rover selon les distances spécifiées
   private deplacer(distanceX: number, distanceY: number): void {
-    this.position = Position.deplacer(this.position, distanceX, distanceY, this.map.x, this.map.y);
+    this.position = Position.deplacer(
+      this.position,
+      distanceX,
+      distanceY,
+      this.map.x,
+      this.map.y
+    );
   }
 
   // Méthode pour tourner le rover à droite
@@ -35,20 +41,49 @@ export class Rover implements IRover {
   }
 
   // Méthode pour avancer le rover
-  Avancer(): void {
-    // Obtention du déplacement correspondant à l'orientation actuelle
+  Avancer(): boolean {
+    // Simulez le mouvement pour vérifier la présence d'obstacles
     const deplacement = this.deplacements[this.orientation.toString()];
-    // Application du déplacement et ajustement des coordonnées selon la toroïdalité
-    this.deplacer(deplacement.x, deplacement.y);
-    this.position = this.map.getToroidalCoordinates(this.position);
+    const newPosition = Position.deplacer(
+      this.position,
+      deplacement.x,
+      deplacement.y,
+      this.map.x,
+      this.map.y
+    );
+    if (!this.map.isObstacle(newPosition).isPresent) {
+      // Déplacez le rover s'il n'y a pas d'obstacles
+      this.position = newPosition;
+      return true;
+    }
+    console.log('Position obstacle : ' , this.map.isObstacle(newPosition).obstacle)
+    return false;
   }
 
   // Méthode pour reculer le rover
-  Reculer(): void {
+  Reculer(): boolean {
     // Obtention du déplacement correspondant à l'orientation actuelle
     const deplacement = this.deplacements[this.orientation.toString()];
-    // Application du déplacement inverse et ajustement des coordonnées selon la toroïdalité
-    this.deplacer(-deplacement.x, -deplacement.y);
-    this.position = this.map.getToroidalCoordinates(this.position);
+    // Calcul de la nouvelle position en appliquant le déplacement inverse
+    const newPosition = Position.deplacer(
+      this.position,
+      -deplacement.x,
+      -deplacement.y,
+      this.map.x,
+      this.map.y
+    );
+    // Mise à jour de la position avec les coordonnées toroïdales
+    // const toroidalPosition = this.map.getToroidalCoordinates(newPosition);
+
+    // Vérification s'il y a un obstacle à la nouvelle position
+    if (!this.map.isObstacle(newPosition).isPresent) {
+      // Aucun obstacle n'est présent, donc le rover peut reculer
+      this.position = newPosition;
+      return true; // Retourne true si le rover a pu reculer
+    }
+
+    // Un obstacle est détecté, le rover ne peut pas reculer
+    console.log('Position obstacle: ' , this.map.isObstacle(newPosition).obstacle)
+    return false; // Retourne false si un obstacle empêche le mouvement
   }
 }

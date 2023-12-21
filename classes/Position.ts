@@ -1,6 +1,9 @@
 import { IPosition } from "../interfaces/IPosition";
 
 export class Position implements IPosition {
+  equals(other: Position): boolean {
+    return this.x === other.x && this.y === other.y;
+  }
   constructor(public x: number, public y: number) {}
 
   static deplacer(position: Position, distanceX: number, distanceY: number, mapX: number, mapY: number): Position {
@@ -14,6 +17,6 @@ export class Position implements IPosition {
 
   // Méthode pour obtenir les coordonnées actuelles du rover
   getPosition(): IPosition {
-    return { x: this.x, y: this.y };
+    return { x: this.x, y: this.y }; 
   }
 }
