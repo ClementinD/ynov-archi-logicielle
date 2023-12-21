@@ -1,4 +1,4 @@
-import { IMap } from "../interfaces/IMaps";
+import { IMap } from "../interfaces/IMap";
 import { Position } from "../classes/Position";
 
 export class Map implements IMap {
