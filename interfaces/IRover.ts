@@ -1,7 +1,8 @@
 import { Position } from "../classes/Position";
+import { Orientation } from "../classes/Orientation";
 
 export interface IRover {
-  orientation: string;
+  orientation: Orientation;
   position: Position;
 
   TournerADroite(): void;

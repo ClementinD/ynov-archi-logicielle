@@ -1,5 +1,5 @@
 import { Rover } from "./classes/Rover";
-import { Orientation } from "./enums/Orientation";
+import { Orientation } from "./classes/Orientation";
 import { Map } from "./classes/Map";
 
 const map = new Map(4, 4);
