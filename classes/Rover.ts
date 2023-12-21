@@ -4,6 +4,7 @@ import { IRover } from "../interfaces/IRover";
 import { Map } from "../classes/Map";
 
 export class Rover implements IRover {
+  [x: string]: any;
   // Constructeur de la classe Rover
   constructor(
     public orientation: Orientation,
@@ -21,7 +22,13 @@ export class Rover implements IRover {
 
   // Fonction privée pour déplacer le rover selon les distances spécifiées
   private deplacer(distanceX: number, distanceY: number): void {
-    this.position = Position.deplacer(this.position, distanceX, distanceY, this.map.x, this.map.y);
+    this.position = Position.deplacer(
+      this.position,
+      distanceX,
+      distanceY,
+      this.map.x,
+      this.map.y
+    );
   }
 
   // Méthode pour tourner le rover à droite
