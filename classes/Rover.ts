@@ -58,4 +58,14 @@ export class Rover implements IRover {
     this.deplacer(-deplacement.x, -deplacement.y);
     this.position = this.map.getToroidalCoordinates(this.position);
   }
+
+  // Méthode pour obtenir les coordonnées actuelles du rover
+  getPosition(): Position {
+    return this.position;
+  }
+
+  // Méthode pour obtenir l'orientation actuelle du rover
+  getOrientation(): Orientation {
+    return this.orientation;
+  }
 }
