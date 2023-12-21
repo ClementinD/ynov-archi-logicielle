@@ -5,13 +5,16 @@ import { Map } from "../classes/Map";
 
 describe("Rover", () => {
   let map: Map;
+  let obstaclesPositions;
   let rover: Rover;
 
   beforeEach(() => {
     // Initialisation de la carte avec une taille de 4x4
     map = new Map(4, 4);
-    // Initialisation du rover avec une orientation vers le sud, positionné en (0, 0) sur la carte
-    rover = new Rover(Orientation.South, new Position(0, 0), map);
+    // Définir les positions des obstacles
+    obstaclesPositions = [new Position(0, 3)]; // Remplacer par les positions réelles des obstacles
+    // Créer une nouvelle instance de Rover en passant les obstacles comme quatrième argument
+    rover = new Rover(Orientation.South, new Position(0, 0), map, obstaclesPositions);
   });
 
   // Test pour vérifier le déplacement vers l'avant (Avancer)
