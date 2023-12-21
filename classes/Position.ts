@@ -11,4 +11,9 @@ export class Position implements IPosition {
     };
     return new Position(newPosition.x, newPosition.y);
   }
+
+  // Méthode pour obtenir les coordonnées actuelles du rover
+  getPosition(): IPosition {
+    return { x: this.x, y: this.y };
+  }
 }
