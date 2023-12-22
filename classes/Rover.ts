@@ -3,9 +3,10 @@ import { Position } from "../classes/Position";
 import { IRover } from "../interfaces/IRover";
 import { Map } from "../classes/Map";
 import { Obstacle } from "./Obstacle";
+import { Entier } from "./Entier";
+import { ObstacleDetecteException } from "./ObstacleDetecteException";
 
 export class Rover implements IRover {
-  [x: string]: any;
   public obstacles: Obstacle[];
 
   // Constructeur de la classe Rover
@@ -28,12 +29,12 @@ export class Rover implements IRover {
 
   // Méthode pour vérifier s'il y a un obstacle et mettre à jour la position du rover
   private detecterObstacleAndUpdatePosition(nextPosition: Position) {
-    if (this.obstacles.some(obstacle => obstacle.position.equals(nextPosition))) {
-      console.log("Obstacle détecté! Arrêt du rover.");
-      console.log(`Position de l'obstacle: (${nextPosition.x}, ${nextPosition.y})`);
-      return;
-    }
-    // Mise à jour de la position du rover avec nextPosition
+    this.obstacles.forEach(obstacle => {
+      obstacle.position.equals(nextPosition, () => {
+        throw new ObstacleDetecteException(nextPosition);
+      });
+    });
+
     this.position = this.map.getToroidalCoordinates(nextPosition);
   }
 
@@ -49,16 +50,20 @@ export class Rover implements IRover {
 
   // Méthode pour avancer le rover
   Avancer(): void {
-    const deplacement = this.deplacements[this.orientation.toString()];
-    const nextPosition = Position.deplacer(this.position, deplacement.x, deplacement.y, this.map.x, this.map.y);
-    this.detecterObstacleAndUpdatePosition(nextPosition)
+    try {
+      const deplacement = this.deplacements[this.orientation.toString()];
+      const nextPosition = Position.deplacer(this.position, new Entier(deplacement.x), new Entier(deplacement.y), this.map.x, this.map.y);
+      this.detecterObstacleAndUpdatePosition(nextPosition);
+    } catch (e) {}
   }
 
   // Méthode pour reculer le rover
   Reculer(): void {
-    const deplacement = this.deplacements[this.orientation.toString()];
-    const nextPosition = Position.deplacer(this.position, -deplacement.x, -deplacement.y, this.map.x, this.map.y);
-    this.detecterObstacleAndUpdatePosition(nextPosition)
+    try {
+      const deplacement = this.deplacements[this.orientation.toString()];
+      const nextPosition = Position.deplacer(this.position, new Entier(-deplacement.x), new Entier(-deplacement.y), this.map.x, this.map.y);
+      this.detecterObstacleAndUpdatePosition(nextPosition);
+    } catch (e) {}
   }
 
   // Méthode pour obtenir les coordonnées actuelles du rover

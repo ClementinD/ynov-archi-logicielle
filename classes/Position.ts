@@ -1,34 +1,30 @@
+import { Entier } from "./Entier";
+
 export class Position {
   [x: string]: any;
-  constructor(public x: number, public y: number) {}
+  constructor(public x: Entier, public y: Entier) {}
 
   static deplacer(
     position: Position,
-    distanceX: number,
-    distanceY: number,
-    mapX: number,
-    mapY: number
+    distanceX: Entier,
+    distanceY: Entier,
+    mapX: Entier,
+    mapY: Entier
   ): Position {
-    // Fonction pour gérer correctement le modulo avec des nombres négatifs
-    function mod(n: number, m: number): number {
-      return ((n % m) + m) % m;
-    }
+    const newX = position.x.add(distanceX).modulo(mapX);
+    const newY = position.y.add(distanceY).modulo(mapY);
 
-    // Calcul des nouvelles coordonnées en prenant en compte la toroïdalité
-    const newPosition = {
-      x: mod(position.x + distanceX, mapX),
-      y: mod(position.y + distanceY, mapY),
-    };
-    return new Position(newPosition.x, newPosition.y);
+    return new Position(newX, newY);
   }
 
   // Méthode pour obtenir les coordonnées actuelles du rover
-  getPosition(): { x: number; y: number } {
+  value(): { x: Entier; y: Entier } {
     return { x: this.x, y: this.y };
   }
 
-  // Méthode à la classe Position
-  equals(other: Position): boolean {
-    return this.x === other.x && this.y === other.y;
+  equals(other: Position, action: () => void): void {
+    if (this.x.egalTo(other.x) && this.y.egalTo(other.y)) {
+      action();
+    }
   }
 }

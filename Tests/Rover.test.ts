@@ -3,6 +3,7 @@ import { Orientation } from "../classes/Orientation";
 import { Position } from "../classes/Position";
 import { Map } from "../classes/Map";
 import { Interpreter } from "../classes/Interpreter";
+import { Entier } from "../classes/Entier";
 
 describe("Rover", () => {
   let map: Map;
@@ -12,11 +13,11 @@ describe("Rover", () => {
 
   beforeEach(() => {
     // Initialisation de la carte avec une taille de 4x4
-    map = new Map(4, 4);
+    map = new Map(new Entier(4), new Entier(4));
     // Définir les positions des obstacles
-    obstaclesPositions = [new Position(2, 1)];
+    obstaclesPositions = [new Position(new Entier(2), new Entier(1))];
     // Créer une nouvelle instance de Rover en passant les obstacles comme quatrième argument
-    rover = new Rover(Orientation.South, new Position(0, 0), map, obstaclesPositions);
+    rover = new Rover(Orientation.South, new Position(new Entier(0), new Entier(0)), map, obstaclesPositions);
     interpreter = new Interpreter(rover);
   });
 
@@ -25,7 +26,7 @@ describe("Rover", () => {
     // Action : Appel de la méthode Avancer du rover
     rover.Avancer();
     // Vérification : La position du rover devrait être (0, 1) sur la carte
-    expect(rover.position.getPosition()).toEqual({ x: 0, y: 1 });
+    expect(rover.position.value()).toEqual({ x: new Entier(0), y: new Entier(1) });
   });
 
   // Test pour vérifier le déplacement vers l'arrière (Reculer)
@@ -33,7 +34,7 @@ describe("Rover", () => {
     // Action : Appel de la méthode Reculer du rover
     rover.Reculer();
     // Vérification : La position du rover devrait être (0, 3) sur la carte, en considérant la toroïdalité
-    expect(rover.position.getPosition()).toEqual({ x: 0, y: map.y - 1 });
+    expect(rover.position.value()).toEqual({ x: new Entier(0), y: new Entier(map.y.currentValue() - 1) });
   });
 
   // Test pour vérifier la rotation vers la droite (TournerADroite)
@@ -61,7 +62,7 @@ describe("Rover", () => {
 
     // Vérifiez la position et l'orientation finale du rover
     // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
-    expect(rover.getPosition()).toEqual(new Position(3, 0));
+    expect(rover.getPosition()).toEqual(new Position(new Entier(3), new Entier(0)));
     expect(rover.getOrientation().toString()).toEqual("NORTH");
   });
 
@@ -74,7 +75,7 @@ describe("Rover", () => {
 
     // Vérifiez la position et l'orientation finale du rover
     // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
-    expect(rover.getPosition()).toEqual(new Position(3, 1));
+    expect(rover.getPosition()).toEqual(new Position(new Entier(3), new Entier(1)));
     expect(rover.getOrientation().toString()).toEqual("NORTH");
   });
 });
