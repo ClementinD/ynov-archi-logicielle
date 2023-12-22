@@ -26,18 +26,7 @@ export class Rover implements IRover {
     [Orientation.West.toString()]: { x: -1, y: 0 },
   };
 
-  // Fonction privée pour déplacer le rover selon les distances spécifiées
-  private deplacer(distanceX: number, distanceY: number): void {
-    this.position = Position.deplacer(
-      this.position,
-      distanceX,
-      distanceY,
-      this.map.x,
-      this.map.y
-    );
-  }
-
-  // Ajoutez une méthode pour vérifier s'il y a un obstacle
+  // Méthode pour vérifier s'il y a un obstacle
   private detecterObstacle(nextPosition: Position): boolean {
     return this.obstacles.some(obstacle => obstacle.position.equals(nextPosition));
   }

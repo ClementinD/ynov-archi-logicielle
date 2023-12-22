@@ -8,7 +8,7 @@ export class Map implements IMap {
     return { x: this.x, y: this.y };
   }
 
-  // Ajoutez une méthode pour obtenir les coordonnées toroïdales
+  // Méthode pour obtenir les coordonnées toroïdales
   getToroidalCoordinates(position: Position): Position {
     return new Position(
       (position.x + this.x) % this.x,

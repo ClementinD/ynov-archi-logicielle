@@ -27,7 +27,7 @@ export class Position {
     return { x: this.x, y: this.y };
   }
 
-  // Ajoutez cette méthode à la classe Position
+  // Méthode à la classe Position
   equals(other: Position): boolean {
     return this.x === other.x && this.y === other.y;
   }
