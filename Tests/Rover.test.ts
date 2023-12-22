@@ -20,32 +20,6 @@ describe("Rover", () => {
     interpreter = new Interpreter(rover);
   });
 
-  // Test pour vérifier le comportement après une série de commandes
-  test("should follow command sequence and barrier", () => {
-    const commandes = ["A", "D", "R", "D", "A", "D", "A"];
-    commandes.forEach((commande) => {
-      interpreter.interpretCommand(commande);
-    });
-
-    // Vérifiez la position et l'orientation finale du rover
-    // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
-    expect(rover.getPosition()).toEqual(new Position(3, 0));
-    expect(rover.getOrientation().toString()).toEqual("NORTH");
-  });
-
-  // Test pour vérifier le comportement après une série de commandes
-  test("should follow double char command sequence and barrier", () => {
-    const commandes = ["AA", "D", "R", "DA", "A", "D", "A"];
-    commandes.forEach((commande) => {
-      interpreter.interpretCommand(commande);
-    });
-
-    // Vérifiez la position et l'orientation finale du rover
-    // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
-    expect(rover.getPosition()).toEqual(new Position(1, 1));
-    expect(rover.getOrientation().toString()).toEqual("NORTH");
-  });
-
   // Test pour vérifier le déplacement vers l'avant (Avancer)
   test("should move front", () => {
     // Action : Appel de la méthode Avancer du rover
@@ -76,5 +50,31 @@ describe("Rover", () => {
     rover.TournerAGauche();
     // Vérification : L'orientation du rover devrait être à l'est (EAST)
 		expect(rover.orientation.getOrientation().toString()).toEqual("NORTH");
+  });
+
+  // Test pour vérifier le comportement après une série de commandes
+  test("should follow command sequence and barrier", () => {
+    const commandes = ["A", "D", "R", "D", "A", "D", "A"];
+    commandes.forEach((commande) => {
+      interpreter.interpretCommand(commande);
+    });
+
+    // Vérifiez la position et l'orientation finale du rover
+    // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
+    expect(rover.getPosition()).toEqual(new Position(3, 0));
+    expect(rover.getOrientation().toString()).toEqual("NORTH");
+  });
+
+  // Test pour vérifier le comportement après une série de commandes
+  test("should follow double chars command sequence and barrier", () => {
+    const commandes = ["AA", "D", "R", "DA", "A", "D", "A"];
+    commandes.forEach((commande) => {
+      interpreter.interpretCommand(commande);
+    });
+
+    // Vérifiez la position et l'orientation finale du rover
+    // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
+    expect(rover.getPosition()).toEqual(new Position(1, 1));
+    expect(rover.getOrientation().toString()).toEqual("NORTH");
   });
 });

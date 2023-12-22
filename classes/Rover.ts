@@ -26,7 +26,7 @@ export class Rover implements IRover {
     [Orientation.West.toString()]: { x: -1, y: 0 },
   };
 
-  // Méthode pour vérifier s'il y a un obstacle
+  // Méthode pour vérifier s'il y a un obstacle et mettre à jour la position du rover
   private detecterObstacleAndUpdatePosition(nextPosition: Position) {
     if (this.obstacles.some(obstacle => obstacle.position.equals(nextPosition))) {
       console.log("Obstacle détecté! Arrêt du rover.");
