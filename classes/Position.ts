@@ -1,10 +1,14 @@
-import { IPosition } from "../interfaces/IPosition";
-
-export class Position implements IPosition {
+export class Position {
   [x: string]: any;
   constructor(public x: number, public y: number) {}
 
-  static deplacer(position: Position, distanceX: number, distanceY: number, mapX: number, mapY: number): Position {
+  static deplacer(
+    position: Position,
+    distanceX: number,
+    distanceY: number,
+    mapX: number,
+    mapY: number
+  ): Position {
     // Fonction pour gérer correctement le modulo avec des nombres négatifs
     function mod(n: number, m: number): number {
       return ((n % m) + m) % m;
@@ -19,7 +23,7 @@ export class Position implements IPosition {
   }
 
   // Méthode pour obtenir les coordonnées actuelles du rover
-  getPosition(): IPosition {
+  getPosition(): { x: number; y: number } {
     return { x: this.x, y: this.y };
   }
 
