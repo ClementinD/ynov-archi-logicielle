@@ -1,6 +1,6 @@
 import { IPosition } from "../interfaces/IPosition";
 
-// objet valeu
+// objet valeur
 export class Position implements IPosition {
   equals(other: Position): boolean {
     return this.x === other.x && this.y === other.y;

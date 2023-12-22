@@ -1,3 +1,4 @@
+// objet valeur
 export class Orientation {
   static readonly North = new Orientation("NORTH");
   static readonly South = new Orientation("SOUTH");

@@ -3,13 +3,13 @@ import { Position } from "../classes/Position";
 import { IRover } from "../interfaces/IRover";
 import { Map } from "../classes/Map";
 
-// entité
+// objet valeur
 export class Rover implements IRover {
   // Constructeur de la classe Rover
   constructor(
-    public orientation: Orientation,
-    public position: Position, 
-    public map: Map
+    public orientation: Orientation, // objet valeur
+    public position: Position, // objet valeur
+    public map: Map // objet valeur
   ) {}
 
   // Objets de mapping pour les déplacements, les changements d'orientation à droite et à gauche
