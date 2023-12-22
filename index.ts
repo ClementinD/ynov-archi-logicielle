@@ -28,7 +28,7 @@ import { RoverInterpreter } from "./classes/RoverInterpreter";
 
 // suite de commande & obstacles
 
-const obstacles = [new Position(2, 1)]; // Liste des obstacles
+const obstacles = [new Position(2, 1), new Position(3, 0)]; // Liste des obstacles
 const map_1 = new Map(4, 4, obstacles);
 const rover_1 = new  Rover(Orientation.South, new Position(0, 0), map_1);
 

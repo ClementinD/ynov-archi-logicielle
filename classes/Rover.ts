@@ -3,11 +3,12 @@ import { Position } from "../classes/Position";
 import { IRover } from "../interfaces/IRover";
 import { Map } from "../classes/Map";
 
+// entité
 export class Rover implements IRover {
   // Constructeur de la classe Rover
   constructor(
     public orientation: Orientation,
-    public position: Position,
+    public position: Position, 
     public map: Map
   ) {}
 

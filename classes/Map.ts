@@ -1,6 +1,7 @@
 import { IMap } from "../interfaces/IMaps";
 import { Position } from "../classes/Position";
 
+// 
 export class Map implements IMap {
   private obstacles: Position[];
 
