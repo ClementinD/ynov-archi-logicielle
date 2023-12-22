@@ -27,8 +27,14 @@ export class Rover implements IRover {
   };
 
   // Méthode pour vérifier s'il y a un obstacle
-  private detecterObstacle(nextPosition: Position): boolean {
-    return this.obstacles.some(obstacle => obstacle.position.equals(nextPosition));
+  private detecterObstacleAndUpdatePosition(nextPosition: Position) {
+    if (this.obstacles.some(obstacle => obstacle.position.equals(nextPosition))) {
+      console.log("Obstacle détecté! Arrêt du rover.");
+      console.log(`Position de l'obstacle: (${nextPosition.x}, ${nextPosition.y})`);
+      return;
+    }
+    // Mise à jour de la position du rover avec nextPosition
+    this.position = this.map.getToroidalCoordinates(nextPosition);
   }
 
   // Méthode pour tourner le rover à droite
@@ -45,26 +51,14 @@ export class Rover implements IRover {
   Avancer(): void {
     const deplacement = this.deplacements[this.orientation.toString()];
     const nextPosition = Position.deplacer(this.position, deplacement.x, deplacement.y, this.map.x, this.map.y);
-    if (this.detecterObstacle(nextPosition)) {
-      console.log("Obstacle détecté! Arrêt du rover.");
-      console.log(`Position de l'obstacle: (${nextPosition.x}, ${nextPosition.y})`);
-      return; // S'arrête si un obstacle est détecté
-    }
-    // Mise à jour de la position du rover avec nextPosition
-    this.position = this.map.getToroidalCoordinates(nextPosition);
+    this.detecterObstacleAndUpdatePosition(nextPosition)
   }
 
   // Méthode pour reculer le rover
   Reculer(): void {
     const deplacement = this.deplacements[this.orientation.toString()];
     const nextPosition = Position.deplacer(this.position, -deplacement.x, -deplacement.y, this.map.x, this.map.y);
-    if (this.detecterObstacle(nextPosition)) {
-      console.log("Obstacle détecté! Arrêt du rover.");
-      console.log(`Position de l'obstacle: (${nextPosition.x}, ${nextPosition.y})`);
-      return; // S'arrête si un obstacle est détecté
-    }
-    // Mise à jour de la position du rover avec nextPosition
-    this.position = this.map.getToroidalCoordinates(nextPosition);
+    this.detecterObstacleAndUpdatePosition(nextPosition)
   }
 
   // Méthode pour obtenir les coordonnées actuelles du rover
