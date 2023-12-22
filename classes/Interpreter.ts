@@ -1,8 +1,6 @@
-import { Position } from "../classes/Position";
-import { IInterpreter } from "../interfaces/IInterpreter";
 import { Rover } from "./Rover";
 
-export class Interpreter implements IInterpreter {
+export class Interpreter {
   constructor(public rover: Rover) {}
 
   interpretCommand(command: string): void {
