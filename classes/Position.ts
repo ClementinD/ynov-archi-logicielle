@@ -1,7 +1,6 @@
 import { Entier } from "./Entier";
 
 export class Position {
-  [x: string]: any;
   constructor(public x: Entier, public y: Entier) {}
 
   static deplacer(

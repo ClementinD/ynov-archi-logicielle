@@ -22,7 +22,7 @@ export class Interpreter {
           console.log("Commande inconnue : " + command);
           break;
       }
-      console.log(this.rover.getPosition(), this.rover.getOrientation());
+      console.log(this.rover.position.x, this.rover.position.y);
     }
   }
 }

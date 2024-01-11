@@ -1,5 +1,5 @@
 export class Entier {
-  private value: number;
+  private  readonly value: number;
 
   constructor(value: number) {
     this.value = Math.floor(value); // S'assurer que la valeur est un entier
