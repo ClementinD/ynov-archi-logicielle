@@ -7,8 +7,8 @@ import { ObstacleDetecteException } from "./ObstacleDetecteException";
 import { Orientation } from "./Orientation";
 
 export class Deplacement {
-  private rover: Rover;
-  private map: Map;
+  private readonly rover: Rover;
+  private readonly map: Map;
   private readonly obstacles: Obstacle[];
 
   constructor(rover: Rover, map: Map, obstacles: Position[]) {
