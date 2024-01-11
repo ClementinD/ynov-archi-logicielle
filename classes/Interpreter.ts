@@ -22,7 +22,7 @@ export class Interpreter {
           console.log("Commande inconnue : " + command);
           break;
       }
-      console.log(this.rover.position.x, this.rover.position.y);
+      console.log(`x : ${this.rover.position.value().x.currentValue().toString()}, y : ${this.rover.position.value().y.currentValue().toString()}`);
     }
   }
 }
