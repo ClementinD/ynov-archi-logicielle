@@ -11,7 +11,7 @@ export class Orientation {
     Orientation.West,
   ];
 
-  private constructor(private value: string) {}
+  constructor(private value: string) {}
 
   toString(): string {
     return this.value;

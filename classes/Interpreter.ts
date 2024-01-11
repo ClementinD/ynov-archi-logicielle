@@ -1,7 +1,26 @@
 import { Rover } from "./Rover";
+import { Map } from "./Map";
+import { Position } from "./Position";
+import { Orientation } from "./Orientation";
+import { Entier } from "./Entier";
+import { Deplacement } from "./Deplacement";
+import { Obstacle } from "./Obstacle";
+import { GestionObstacles } from "./GestionObstacles";
 
 export class Interpreter {
-  constructor(public rover: Rover) {}
+  public rover: Rover;
+
+  constructor(map: Map, obstaclesPositions: Position[]) {
+    const orientationInitiale = new Orientation("NORTH");
+    const positionInitiale = new Position(new Entier(0), new Entier(0));
+
+    const obstacles = obstaclesPositions.map(pos => new Obstacle(pos));
+    const gestionObstacle = new GestionObstacles(obstacles);
+
+    const deplacement = new Deplacement(orientationInitiale, positionInitiale, map, gestionObstacle);
+
+    this.rover = new Rover(deplacement);
+  }
 
   interpretCommand(command: string): void {
     for (const char of command) {
@@ -22,7 +41,7 @@ export class Interpreter {
           console.log("Commande inconnue : " + command);
           break;
       }
-      console.log(`x : ${this.rover.position.value().x.currentValue().toString()}, y : ${this.rover.position.value().y.currentValue().toString()}`);
+      console.log(this.rover.position);
     }
   }
 }

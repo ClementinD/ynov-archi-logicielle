@@ -1,56 +1,94 @@
-import { Rover } from "./Rover";
 import { Position } from "../classes/Position";
 import { Map } from "../classes/Map";
-import { Obstacle } from "./Obstacle";
 import { Entier } from "./Entier";
-import { ObstacleDetecteException } from "./ObstacleDetecteException";
 import { Orientation } from "./Orientation";
+import { IDeplacement } from "../interfaces/IDeplacement"
+import { IGestionObstacle } from "../interfaces/IGestionObstacles";
 
-export class Deplacement {
-  private readonly rover: Rover;
+export class Deplacement implements IDeplacement {
+  private position: Position;
+  private orientation: Orientation;
   private readonly map: Map;
-  private readonly obstacles: Obstacle[];
+  private gestionObstacle: IGestionObstacle;
 
-  constructor(rover: Rover, map: Map, obstacles: Position[]) {
-    this.rover = rover;
+  constructor(orientation: Orientation, position: Position, map: Map, gestionObstacle: IGestionObstacle) {
+    this.orientation = orientation;
+    this.position = position;
     this.map = map;
-    this.obstacles = obstacles.map(obstaclePosition => new Obstacle(obstaclePosition));
+    this.gestionObstacle = gestionObstacle;
   }
 
-  private detecterObstacleAndUpdatePosition(nextPosition: Position) {
-    this.obstacles.forEach(obstacle => {
-      obstacle.position.equals(nextPosition, () => {
-        throw new ObstacleDetecteException(nextPosition);
-      });
-    });
-    this.rover.position = this.map.getToroidalCoordinates(nextPosition);
+  private detecterObstacleAndUpdatePosition(nextPosition: Position): boolean {
+    if (this.gestionObstacle.detecterObstacle(nextPosition)) {
+      this.contournerObstacle();
+      return true;
+    }
+    this.position = this.map.getToroidalCoordinates(nextPosition);
+    return false;
   }
 
-  TournerADroite(): void {
-    this.rover.orientation = this.rover.orientation.orientationSuivante();
+  private contournerObstacle(): void {
+    this.tournerADroite();
+    this.avancer();
   }
 
-  TournerAGauche(): void {
-    this.rover.orientation = this.rover.orientation.orientationPrecedente();
+  tournerADroite(): void {
+    this.orientation = this.orientation.orientationSuivante();
   }
 
-  Avancer(): void {
-    const deplacement = { x: 0, y: -1 };
-    const nextPosition = Position.deplacer(this.rover.position, new Entier(deplacement.x), new Entier(deplacement.y), this.map.x, this.map.y);
+  tournerAGauche(): void {
+    this.orientation = this.orientation.orientationPrecedente();
+  }
+
+  avancer(): void {
+    let deplacement;
+    switch (this.orientation.toString()) {
+      case "NORTH":
+        deplacement = { x: 0, y: -1 };
+        break;
+      case "SOUTH":
+        deplacement = { x: 0, y: 1 };
+        break;
+      case "EAST":
+        deplacement = { x: 1, y: 0 };
+        break;
+      case "WEST":
+        deplacement = { x: -1, y: 0 };
+        break;
+      default:
+        throw new Error("Orientation inconnue");
+    }
+    const nextPosition = Position.deplacer(this.position, new Entier(deplacement.x), new Entier(deplacement.y), this.map.x, this.map.y);
     this.detecterObstacleAndUpdatePosition(nextPosition);
   }
-
-  Reculer(): void {
-    const deplacement = { x: 0, y: 1 };
-    const nextPosition = Position.deplacer(this.rover.position, new Entier(-deplacement.x), new Entier(-deplacement.y), this.map.x, this.map.y);
+  
+  reculer(): void {
+    let deplacement;
+    switch (this.orientation.toString()) {
+      case "NORTH":
+        deplacement = { x: 0, y: 1 };
+        break;
+      case "SOUTH":
+        deplacement = { x: 0, y: -1 };
+        break;
+      case "EAST":
+        deplacement = { x: -1, y: 0 };
+        break;
+      case "WEST":
+        deplacement = { x: 1, y: 0 };
+        break;
+      default:
+        throw new Error("Orientation inconnue");
+    }
+    const nextPosition = Position.deplacer(this.position, new Entier(-deplacement.x), new Entier(-deplacement.y), this.map.x, this.map.y);
     this.detecterObstacleAndUpdatePosition(nextPosition);
   }
-
+  
   getPosition(): Position {
-    return this.rover.position;
+    return this.position;
   }
 
   getOrientation(): Orientation {
-    return this.rover.orientation;
+    return this.orientation;
   }
 }
