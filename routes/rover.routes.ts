@@ -7,7 +7,7 @@ module.exports = (app: any, interpreter: any) => {
     console.log(interpreter.rover.position.value());
 
     const commandes = req.body.command;
-    commandes.forEach((commande) => {
+    commandes.forEach((commande: Array<String>) => {
       interpreter.interpretCommand(commande);
     });
 
