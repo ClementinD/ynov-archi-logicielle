@@ -1,18 +1,14 @@
 import { Router, Request, Response, NextFunction } from "express";
 
-import { Interpreter } from "../Topologie/Interpreter";
-
-module.exports = (app: any, rover: any) => {
+module.exports = (app: any, interpreter: any) => {
   const router = Router();
-  const interpreter = new Interpreter(rover);
 
-  router.post("/", (req: Request, res: Response, next: NextFunction) => {
-    console.log(interpreter.rover.position.getPosition());
-    if (interpreter.checkCommand(req.body.command)) {
-      interpreter.interpretCommand(req.body.command);
-    }
-    console.log(interpreter.rover.position.getPosition());
-    res.json({ message: "Rover is moving" });
+  router.post("/", (req: Request, res: Response) => {
+    console.log(interpreter.rover.position.value());
+    interpreter.interpretCommand(req.body.command);
+    console.log(interpreter.rover.position.value());
+
+    res.json({ position: interpreter.rover.position.value() });
   });
 
   app.use("/api/rover", router);

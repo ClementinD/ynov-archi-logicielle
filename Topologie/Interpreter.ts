@@ -28,6 +28,7 @@ export class Interpreter {
   }
 
   interpretCommand(command: string): void {
+    console.log(command);
     for (const char of command) {
       switch (char) {
         case "A":
