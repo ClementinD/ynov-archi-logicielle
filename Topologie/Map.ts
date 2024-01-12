@@ -1,5 +1,5 @@
 import { IMap } from "../interfaces/IMap";
-import { Position } from "../classes/Position";
+import { Position } from "./Position";
 import { Entier } from "./Entier";
 
 export class Map implements IMap {

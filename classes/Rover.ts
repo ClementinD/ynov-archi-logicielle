@@ -1,6 +1,6 @@
 import { IRover } from "../interfaces/IRover";
 import { IDeplacement } from "../interfaces/IDeplacement";
-import { Deplacement } from "./Deplacement";
+import { Deplacement } from "../Topologie/Deplacement";
 
 export class Rover implements IRover {
   private deplacement: Deplacement;

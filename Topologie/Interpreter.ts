@@ -1,4 +1,4 @@
-import { Rover } from "./Rover";
+import { Rover } from "../classes/Rover";
 import { Map } from "./Map";
 import { Position } from "./Position";
 import { Orientation } from "./Orientation";
@@ -14,15 +14,21 @@ export class Interpreter {
     const orientationInitiale = new Orientation("NORTH");
     const positionInitiale = new Position(new Entier(0), new Entier(0));
 
-    const obstacles = obstaclesPositions.map(pos => new Obstacle(pos));
+    const obstacles = obstaclesPositions.map((pos) => new Obstacle(pos));
     const gestionObstacle = new GestionObstacles(obstacles);
 
-    const deplacement = new Deplacement(orientationInitiale, positionInitiale, map, gestionObstacle);
+    const deplacement = new Deplacement(
+      orientationInitiale,
+      positionInitiale,
+      map,
+      gestionObstacle
+    );
 
     this.rover = new Rover(deplacement);
   }
 
   interpretCommand(command: string): void {
+    console.log(command);
     for (const char of command) {
       switch (char) {
         case "A":
