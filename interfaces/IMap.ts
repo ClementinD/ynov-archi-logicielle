@@ -1,5 +1,5 @@
-import { Entier } from "../classes/Entier";
-import { Position } from "../classes/Position";
+import { Entier } from "../Topologie/Entier";
+import { Position } from "../Topologie/Position";
 
 export interface IMap {
   x: Entier;

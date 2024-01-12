@@ -1,8 +1,8 @@
-import { Position } from "../classes/Position";
-import { Map } from "../classes/Map";
+import { Position } from "./Position";
+import { Map } from "./Map";
 import { Entier } from "./Entier";
 import { Orientation } from "./Orientation";
-import { IDeplacement } from "../interfaces/IDeplacement"
+import { IDeplacement } from "../interfaces/IDeplacement";
 import { IGestionObstacle } from "../interfaces/IGestionObstacles";
 
 export class Deplacement implements IDeplacement {
@@ -11,7 +11,12 @@ export class Deplacement implements IDeplacement {
   private readonly map: Map;
   private gestionObstacle: IGestionObstacle;
 
-  constructor(orientation: Orientation, position: Position, map: Map, gestionObstacle: IGestionObstacle) {
+  constructor(
+    orientation: Orientation,
+    position: Position,
+    map: Map,
+    gestionObstacle: IGestionObstacle
+  ) {
     this.orientation = orientation;
     this.position = position;
     this.map = map;
@@ -58,10 +63,16 @@ export class Deplacement implements IDeplacement {
       default:
         throw new Error("Orientation inconnue");
     }
-    const nextPosition = Position.deplacer(this.position, new Entier(deplacement.x), new Entier(deplacement.y), this.map.x, this.map.y);
+    const nextPosition = Position.deplacer(
+      this.position,
+      new Entier(deplacement.x),
+      new Entier(deplacement.y),
+      this.map.x,
+      this.map.y
+    );
     this.detecterObstacleAndUpdatePosition(nextPosition);
   }
-  
+
   reculer(): void {
     let deplacement;
     switch (this.orientation.toString()) {
@@ -80,10 +91,16 @@ export class Deplacement implements IDeplacement {
       default:
         throw new Error("Orientation inconnue");
     }
-    const nextPosition = Position.deplacer(this.position, new Entier(-deplacement.x), new Entier(-deplacement.y), this.map.x, this.map.y);
+    const nextPosition = Position.deplacer(
+      this.position,
+      new Entier(-deplacement.x),
+      new Entier(-deplacement.y),
+      this.map.x,
+      this.map.y
+    );
     this.detecterObstacleAndUpdatePosition(nextPosition);
   }
-  
+
   getPosition(): Position {
     return this.position;
   }
