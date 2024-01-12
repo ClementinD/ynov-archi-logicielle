@@ -1,5 +1,5 @@
-import { Position } from "../classes/Position";
-import { Map } from "../classes/Map";
+import { Position } from "./Position";
+import { Map } from "./Map";
 import { Entier } from "./Entier";
 import { Orientation } from "./Orientation";
 import { IDeplacement } from "../interfaces/IDeplacement"

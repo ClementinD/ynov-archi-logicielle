@@ -1,12 +1,12 @@
-import { Rover } from "./classes/Rover";
-import { Orientation } from "./classes/Orientation";
-import { Position } from "./classes/Position";
-import { Map } from "./classes/Map";
-import { Interpreter } from "./classes/Interpreter";
-import { Entier } from "./classes/Entier";
-import { Obstacle } from "./classes/Obstacle";
-import { GestionObstacles } from "./classes/GestionObstacles";
-import { Deplacement } from "./classes/Deplacement";
+import { Rover } from "./src/classes/Rover";
+import { Orientation } from "./src/classes/Orientation";
+import { Position } from "./src/classes/Position";
+import { Map } from "./src/classes/Map";
+import { Interpreter } from "./src/classes/Interpreter";
+import { Entier } from "./src/classes/Entier";
+import { Obstacle } from "./src/classes/Obstacle";
+import { GestionObstacles } from "./src/classes/GestionObstacles";
+import { Deplacement } from "./src/classes/Deplacement";
 
 // Initialisation de la carte avec une taille de 4x4
 const map = new Map(new Entier(6), new Entier(6));

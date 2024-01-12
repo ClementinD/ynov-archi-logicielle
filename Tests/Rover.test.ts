@@ -1,12 +1,12 @@
-import { Rover } from "../classes/Rover";
-import { Orientation } from "../classes/Orientation";
-import { Position } from "../classes/Position";
-import { Map } from "../classes/Map";
-import { Interpreter } from "../classes/Interpreter";
-import { Entier } from "../classes/Entier";
-import { GestionObstacles } from "../classes/GestionObstacles";
-import { Obstacle } from "../classes/Obstacle";
-import { Deplacement } from "../classes/Deplacement";
+import { Rover } from "../src/classes/Rover";
+import { Orientation } from "../src/classes/Orientation";
+import { Position } from "../src/classes/Position";
+import { Map } from "../src/classes/Map";
+import { Interpreter } from "../src/classes/Interpreter";
+import { Entier } from "../src/classes/Entier";
+import { GestionObstacles } from "../src/classes/GestionObstacles";
+import { Obstacle } from "../src/classes/Obstacle";
+import { Deplacement } from "../src/classes/Deplacement";
 
 describe("Rover", () => {
   let map: Map;
