@@ -1,7 +1,6 @@
 // GestionObstacles.ts
 import { IGestionObstacle } from "../interfaces/IGestionObstacles";
 import { Position } from "./Position";
-import { Obstacle } from "./Obstacle";
 import { ObstacleDetecteException } from "./ObstacleDetecteException";
 import { Entier } from "./Entier";
 
@@ -25,13 +24,4 @@ export class GestionObstacles implements IGestionObstacle {
   
     return obstacleTrouve;
   }
-  
-
-  /*detecterObstacle(position: Position): void {
-    this.obstacles.forEach(obstacle => {
-      obstacle.position.equals(position, () => {
-        new ObstacleDetecteException(position);
-      });
-    });
-  }*/
 }
