@@ -2,6 +2,8 @@
 
 Ce projet simule le déplacement d'un Rover sur la planète Mars, en prenant en compte sa position initiale, son orientation, et sa capacité à avancer, reculer, et tourner de 90° sur lui-même dans les deux sens. Le Rover renvoie son état, comprenant sa position et son orientation, après chaque commande.
 
+<img src="./image.png" title="schema">
+
 ## Instructions
 
 Avant de commencer, assurez-vous d'installer les dépendances nécessaires en exécutant la commande suivante dans votre terminal :
@@ -48,5 +50,3 @@ Le Rover dispose des fonctionnalités suivantes :
 Les planètes sont considérées comme toroïdales, ce qui signifie que si le Rover atteint un bord de la planète, il réapparaîtra de l'autre côté, simulant ainsi un environnement continu. De plus, la taille de la planète est spécifiée en entiers, ce qui implique des dimensions discrètes.
 
 N'oubliez pas de consulter le fichier package.json pour toute autre information sur les scripts disponibles et les dépendances du projet.
-
-<img src="./image.png" title="schema">
