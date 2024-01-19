@@ -1,4 +1,3 @@
-import { Position } from "../Topologie/Position";
 import { Map } from "../Topologie/Map";
 import { Interpreter } from "../Topologie/Interpreter";
 import { Entier } from "../Topologie/Entier";

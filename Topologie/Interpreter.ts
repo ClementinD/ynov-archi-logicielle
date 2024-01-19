@@ -4,7 +4,6 @@ import { Position } from "./Position";
 import { Orientation } from "./Orientation";
 import { Entier } from "./Entier";
 import { Deplacement } from "./Deplacement";
-import { Obstacle } from "./Obstacle";
 import { GestionObstacles } from "./GestionObstacles";
 
 export class Interpreter {
