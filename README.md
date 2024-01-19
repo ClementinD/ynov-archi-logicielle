@@ -48,3 +48,5 @@ Le Rover dispose des fonctionnalités suivantes :
 Les planètes sont considérées comme toroïdales, ce qui signifie que si le Rover atteint un bord de la planète, il réapparaîtra de l'autre côté, simulant ainsi un environnement continu. De plus, la taille de la planète est spécifiée en entiers, ce qui implique des dimensions discrètes.
 
 N'oubliez pas de consulter le fichier package.json pour toute autre information sur les scripts disponibles et les dépendances du projet.
+
+<img src="./image.png" width="350" title="hover text" style="margin: 'auto'">
