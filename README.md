@@ -49,4 +49,4 @@ Les planètes sont considérées comme toroïdales, ce qui signifie que si le Ro
 
 N'oubliez pas de consulter le fichier package.json pour toute autre information sur les scripts disponibles et les dépendances du projet.
 
-<img src="./image.png" width="350" title="hover text" style="margin: 'auto'">
+<img src="./image.png" width="350" title="hover text" style="text-align: 'center'">
