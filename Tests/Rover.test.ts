@@ -10,19 +10,13 @@ import { Deplacement } from "../Topologie/Deplacement";
 
 describe("Rover", () => {
   let map: Map;
-  let obstaclesPositions: Position[];
   let rover: Rover;
   let interpreter: Interpreter;
 
   beforeEach(() => {
     // Initialisation de la carte avec une taille de 4x4
     map = new Map(new Entier(6), new Entier(6));
-    // Définir les positions des obstacles
-    obstaclesPositions = [new Position(new Entier(5), new Entier(4))];
-
-    // Convertir les positions d'obstacles en instances de Obstacle
-    const obstacles = obstaclesPositions.map((pos) => new Obstacle(pos));
-    const gestionObstacles = new GestionObstacles(obstacles);
+    const gestionObstacles = new GestionObstacles();
 
     // Créer une instance de Deplacement
     const orientationInitiale = new Orientation("NORTH");
@@ -37,7 +31,7 @@ describe("Rover", () => {
     // Créer une nouvelle instance de Rover
     rover = new Rover(deplacement);
     // Créer une nouvelle instance d'Interpreter
-    interpreter = new Interpreter(map, obstaclesPositions);
+    interpreter = new Interpreter(map);
   });
 
   // Test pour vérifier le déplacement vers l'avant (Avancer)
@@ -105,7 +99,7 @@ describe("Rover", () => {
     // Vérifiez la position et l'orientation finale du rover
     // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
     expect(interpreter.rover.position.value()).toEqual({
-      x: new Entier(3),
+      x: new Entier(5),
       y: new Entier(2),
     });
     expect(interpreter.rover.orientation.toString()).toEqual("NORTH");
@@ -121,7 +115,7 @@ describe("Rover", () => {
     // Vérifiez la position et l'orientation finale du rover
     // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
     expect(interpreter.rover.position.value()).toEqual(
-      new Position(new Entier(3), new Entier(2))
+      new Position(new Entier(5), new Entier(2))
     );
     expect(interpreter.rover.orientation.getOrientation().toString()).toEqual(
       "NORTH"
@@ -138,25 +132,15 @@ describe("Rover", () => {
     // Vérifiez la position et l'orientation finale du rover
     // La position et l'orientation exactes dépendent de la séquence des commandes et de la logique de déplacement
     expect(interpreter.rover.position.value()).toEqual({
-      x: new Entier(1),
+      x: new Entier(5),
       y: new Entier(3),
     });
-    expect(interpreter.rover.orientation.toString()).toEqual("NORTH");
+    expect(interpreter.rover.orientation.toString()).toEqual("SOUTH");
   });
 
   // Test pour vérifier le comportement avec la détection/contournement de plusieurs obstacles
   test("should follow command sequence with multiple obstacles detection", () => {
-    // Modifier les positions des obstacles
-    obstaclesPositions = [
-      new Position(new Entier(0), new Entier(4)),
-      new Position(new Entier(5), new Entier(4)),
-      new Position(new Entier(1), new Entier(3)),
-      new Position(new Entier(4), new Entier(3)),
-    ];
-
-    // Nouvelle configuration des obstacles
-    const obstacles = obstaclesPositions.map((pos) => new Obstacle(pos));
-    const gestionObstacles = new GestionObstacles(obstacles);
+    const gestionObstacles = new GestionObstacles();
 
     // Recréer Deplacement et Rover avec la nouvelle configuration
     const orientationInitiale = new Orientation("NORTH");
@@ -171,7 +155,7 @@ describe("Rover", () => {
     rover = new Rover(deplacement);
 
     // Recréer Interpreter avec le nouveau Rover
-    interpreter = new Interpreter(map, obstaclesPositions);
+    interpreter = new Interpreter(map);
 
     const commandes = ["ARDDDAAAA", "AAADR"];
     commandes.forEach((commande) => {

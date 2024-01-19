@@ -16,16 +16,9 @@ app.use(express.json());
 
 // Initialisation de la carte avec une taille de 4x4
 const map = new Map(new Entier(6), new Entier(6));
-// Définir les positions des obstacles
-const obstaclesPositions = [
-  new Position(new Entier(0), new Entier(4)),
-  new Position(new Entier(5), new Entier(4)),
-  new Position(new Entier(1), new Entier(3)),
-  new Position(new Entier(4), new Entier(3)),
-];
 
 // Créer une nouvelle instance d'Interpreter
-const interpreter = new Interpreter(map, obstaclesPositions);
+const interpreter = new Interpreter(map);
 
 require("../routes/rover.routes")(app, interpreter);
 

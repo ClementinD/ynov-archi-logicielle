@@ -10,12 +10,11 @@ import { GestionObstacles } from "./GestionObstacles";
 export class Interpreter {
   public rover: Rover;
 
-  constructor(map: Map, obstaclesPositions: Position[]) {
+  constructor(map: Map) {
     const orientationInitiale = new Orientation("NORTH");
     const positionInitiale = new Position(new Entier(0), new Entier(0));
 
-    const obstacles = obstaclesPositions.map((pos) => new Obstacle(pos));
-    const gestionObstacle = new GestionObstacles(obstacles);
+    const gestionObstacle = new GestionObstacles();
 
     const deplacement = new Deplacement(
       orientationInitiale,
